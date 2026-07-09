@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm --filter @workspace/starking-ott run build",
+  "outputDirectory": "artifacts/starking-ott/dist",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

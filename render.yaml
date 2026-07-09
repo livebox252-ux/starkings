@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: starking-api
+    runtime: node
+    # Render root directory must be set to "." (repo root) so pnpm
+    # can resolve workspace packages (lib/api-zod, lib/db, etc.)
+    buildCommand: pnpm install && pnpm --filter @workspace/api-server run build
+    startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TMDB_API_KEY
+        sync: false        # Set this manually in the Render dashboard
+      - key: DATABASE_URL
+        sync: false        # Set this if you add a database in the future
